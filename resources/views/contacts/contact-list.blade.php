@@ -4,39 +4,49 @@
 
 @section('content')
 @if (session('success'))
-    {{ session('success') }}
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="text-success mt-1">
+            {{ session('success') }}
+        </div>
+    </div>
 @endif
-<table>
-    <thead>
+        
+<h1>List Contacts</h1>
+<div class="table-responsive">
+    <table border="1" class="table">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>CONTACT</th>
+                <th>E-MAIL</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+        @forelse ($contacts as $contact)
+            <tr>
+                <td>{{ $contact->name }}</td>
+                <td>{{ $contact->contact }}</td>
+                <td>{{ $contact->email }}</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('contact.form', $contact->id) }}" class="btn btn-warning">Edit</a>
+                        <form method="POST" action="{{ route('contact.destroy', $contact->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Delete register?')">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @empty
         <tr>
-            <td>NAME</td>
-            <td>CONTACT</td>
-            <td>E-MAIL</td>
-            <td>#</td>
-        </tr>
-    </thead>
-    <tbody>
-    @forelse ($contacts as $contact)
-        <tr>
-            <td>{{ $contact->name }}</td>
-            <td>{{ $contact->contact }}</td>
-            <td>{{ $contact->email }}</td>
-            <td>
-                <a href="{{ route('contact.form', $contact->id) }}">Edit</a>
-                <form method="POST" action="{{ route('contact.destroy', $contact->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Delete register?')">Delete</button>
-                </form>
+            <td colspan="4">
+                Empty contact
             </td>
         </tr>
-    @empty
-    <tr>
-        <td colspan="4">
-            Empty contact
-        </td>
-    </tr>
-    @endforelse
-    </tbody>
-</table>
+        @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection
