@@ -15,14 +15,12 @@ class LoginController extends Controller
             'password' => 'required|min:4'
         ]);
 
-        if (Auth::attempt($data)) {
-            $request->session()->regenerate();
-            return redirect()->route('contact.index');
+        if (!Auth::attempt($data)) {
+            return redirect()->route('login')->with('error', 'E-mail or password invalid.');
         }
 
-        return back()->withErrors([
-            'error' => 'Email or password invalid.',
-        ]);
+        $request->session()->regenerate();
+        return redirect()->route('contact.index');
     }
 
     public function logout(Request $request)
