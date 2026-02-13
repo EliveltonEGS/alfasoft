@@ -14,19 +14,23 @@ class ContactController extends Controller
         return view('contacts.contact-list', compact('contacts'));
     }
 
-    public function form(): View
+    public function form(?int $id = null): View
     {
-        return view('contacts.contact-form');
+        $contact = $id ? Contact::findOrFail($id) : null;
+        return view('contacts.contact-form', compact('contact'));
     }
 
     public function store(ContactFormRequest $request)
     {
-        $data = $request->all();
-        Contact::create($data);
+        Contact::create($request->all());
         return redirect()->back()->with('sucess', 'Contact created.');
     }
 
-    public function update(ContactFormRequest $request) {}
+    public function update(ContactFormRequest $request, int $id)
+    {
+        Contact::findOrFail($id)->update($request->validated());
+        return redirect()->back()->with('sucess', 'Contact updated.');
+    }
 
     public function destroy(int $id) {}
 }
