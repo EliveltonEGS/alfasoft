@@ -20,10 +20,16 @@ class ContactController extends Controller
         return view('contacts.contact-form', compact('contact'));
     }
 
+    public function show(int $id): View
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contacts.contact-detail', compact('contact'));
+    }
+
     public function store(ContactFormRequest $request)
     {
-        Contact::create($request->all());
-        return redirect()->back()->with('success', 'Contact created.');
+        $contact = Contact::create($request->all());
+        return redirect()->route('contact.form', ['id' => $contact->id])->with('success', 'Contact created.');
     }
 
     public function update(ContactFormRequest $request, int $id)
@@ -35,6 +41,6 @@ class ContactController extends Controller
     public function destroy(int $id)
     {
         Contact::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Contact deleted.');
+        return redirect()->route('contact.index')->with('success', 'Contact deleted.');
     }
 }

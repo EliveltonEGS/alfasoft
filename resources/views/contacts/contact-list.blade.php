@@ -30,6 +30,7 @@
                 <td>{{ $contact->email }}</td>
                 <td>
                     <div class="d-flex gap-2">
+                         <a href="{{ route('contact.show', $contact->id) }}" class="btn btn-info">Detail</a>
                         <a href="{{ route('contact.form', $contact->id) }}" class="btn btn-warning">Edit</a>
                         <form method="POST" action="{{ route('contact.destroy', $contact->id) }}">
                             @csrf

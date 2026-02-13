@@ -24,7 +24,7 @@ class ContactFormRequest extends FormRequest
         $id = $this->route('id');
 
         return [
-            'name' => 'required|string|max:100',
+            'name' => 'required|string|min:5|max:100',
             'contact' => 'required|string|max:9|unique:contacts,contact,' . $id,
             'email' => 'required|email|max:100|unique:contacts,email,' . $id,
         ];
