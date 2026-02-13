@@ -9,11 +9,17 @@
 </head>
 <body>
 
-    @include('partials.header')
+    @if (Auth::check())
+        @include('partials.header')
+    @endif
 
     <main class="container">
         @yield('content')
     </main>
+
+    @if (Auth::check())
+        @include('partials.footer')
+    @endif
 
 </body>
 </html>

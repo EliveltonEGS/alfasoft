@@ -13,6 +13,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact.form') }}">Contact Form</a>
                 </li>
+                <li>
+                    <form action="{{ route('auth.logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" >Sair</button>
+                    </form>
+                </li>
             </ul>
             </div>
         </div>
