@@ -3,6 +3,28 @@
 @section('title', 'All Contacts')
 
 @section('content')
-    <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas cum explicabo sint tempore repellendus rerum 
-        sed soluta quas nam nostrum. Enim nemo minima dolorem eos odio sunt eaque porro earum.</h1>
+<table>
+    <thead>
+        <tr>
+            <td>NAME</td>
+            <td>CONTACT</td>
+            <td>E-MAIL</td>
+        </tr>
+    </thead>
+    <tbody>
+    @forelse ($contacts as $contact)
+        <tr>
+            <td>{{ $contact->name }}</td>
+            <td>{{ $contact->contact }}</td>
+            <td>{{ $contact->email }}</td>
+        </tr>
+    @empty
+    <tr>
+        <td colspan="3">
+            Empty contact
+        </td>
+    </tr>
+    @endforelse
+    </tbody>
+</table>
 @endsection

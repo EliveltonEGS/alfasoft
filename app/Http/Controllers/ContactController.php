@@ -10,7 +10,8 @@ class ContactController extends Controller
 {
     public function index(): View
     {
-        return view('contacts.contact-list');
+        $contacts = Contact::all();
+        return view('contacts.contact-list', compact('contacts'));
     }
 
     public function form(): View
