@@ -3,6 +3,9 @@
 @section('title', 'All Contacts')
 
 @section('content')
+@if (session('success'))
+    {{ session('success') }}
+@endif
 <table>
     <thead>
         <tr>
@@ -20,6 +23,11 @@
             <td>{{ $contact->email }}</td>
             <td>
                 <a href="{{ route('contact.form', $contact->id) }}">Edit</a>
+                <form method="POST" action="{{ route('contact.destroy', $contact->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Delete register?')">Delete</button>
+                </form>
             </td>
         </tr>
     @empty

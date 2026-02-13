@@ -9,9 +9,9 @@
             @method('PUT')
         @endif
 
-        @if(session('sucess'))
+        @if(session('success'))
             <div>
-                {{ session('sucess') }}
+                {{ session('success') }}
             </div>
         @endif
         <table>

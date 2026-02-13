@@ -23,14 +23,18 @@ class ContactController extends Controller
     public function store(ContactFormRequest $request)
     {
         Contact::create($request->all());
-        return redirect()->back()->with('sucess', 'Contact created.');
+        return redirect()->back()->with('success', 'Contact created.');
     }
 
     public function update(ContactFormRequest $request, int $id)
     {
         Contact::findOrFail($id)->update($request->validated());
-        return redirect()->back()->with('sucess', 'Contact updated.');
+        return redirect()->back()->with('success', 'Contact updated.');
     }
 
-    public function destroy(int $id) {}
+    public function destroy(int $id)
+    {
+        Contact::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Contact deleted.');
+    }
 }
