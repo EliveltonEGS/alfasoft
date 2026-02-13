@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactFormRequest;
 use App\Models\Contact;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ContactController extends Controller
