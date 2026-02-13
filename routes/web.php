@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contac-list', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/contact-list', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact-store', [ContactController::class, 'store'])->name('contact.store');
 Route::put('/contact-update', [ContactController::class, 'update'])->name('contact.update');
 Route::delete('/contact-delete/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
